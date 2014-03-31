@@ -5,4 +5,4 @@ require 'cocoafind'
 
 response = Cocoafind::GitHubApi.new.get_repository('DenHeadless','DTTableViewManager')
 
-puts response.body["stargazers_count"]
+puts response.body.stargazers_count

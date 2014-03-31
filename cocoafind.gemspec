@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "cucumber"
   spec.add_development_dependency "aruba"
 
-  spec.add_dependency 'faraday'
+  spec.add_dependency 'faraday', '= 0.8.9'
   spec.add_dependency 'faraday_middleware'
+  spec.add_dependency 'hashie'
 end

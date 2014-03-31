@@ -7,8 +7,9 @@ module Cocoafind
 
     def initialize
       @connection = Faraday.new "https://#{HOSTNAME}" do |builder|
-        builder.response :json, :content_type => /\bjson$/
         builder.adapter Faraday.default_adapter
+        builder.response :mashify
+        builder.response :json, :content_type => /\bjson$/
       end
     end
 
