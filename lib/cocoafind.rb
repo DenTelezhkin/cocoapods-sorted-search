@@ -1,5 +1,2 @@
 require "cocoafind/version"
-
-module Cocoafind
-  # Your code goes here...
-end
+require 'cocoafind/github_client'

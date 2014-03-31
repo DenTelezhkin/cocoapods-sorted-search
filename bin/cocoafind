@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
-
 $:.push File.expand_path("../../lib", __FILE__)
+
+require 'cocoafind'
+
+response = Cocoafind::GitHubApi.new.get_repository('DenHeadless','DTTableViewManager')
+
+puts response.body["stargazers_count"]
