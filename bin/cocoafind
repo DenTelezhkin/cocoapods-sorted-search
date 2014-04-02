@@ -3,6 +3,9 @@ $:.push File.expand_path("../../lib", __FILE__)
 
 require 'cocoafind'
 
-response = Cocoafind::GitHubApi.new.get_repository('DenHeadless','DTTableViewManager')
+list = ["DenHeadless","DTTableViewManager","DenHeadless","DTCollectionViewManager","DenHeadless","DTRequestVerifier"]
+response = Cocoafind::GitHubApi.new.repositories(list)
 
-puts response.body.stargazers_count
+response.each do |mash|
+    puts mash.stargazers_count
+end

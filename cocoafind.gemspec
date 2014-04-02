@@ -24,8 +24,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "cucumber"
   spec.add_development_dependency "aruba"
+  spec.add_development_dependency "webmock"
 
   spec.add_dependency 'faraday', '= 0.8.9'
   spec.add_dependency 'faraday_middleware'
   spec.add_dependency 'hashie'
+  spec.add_dependency 'typhoeus'
 end
