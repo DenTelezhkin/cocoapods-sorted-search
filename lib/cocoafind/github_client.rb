@@ -11,7 +11,7 @@ module Cocoafind
       @connection = Faraday.new "https://#{HOSTNAME}" do |builder|
         builder.adapter :typhoeus
         builder.response :mashify
-        builder.response :json, :content_type => /\bjson$/
+        builder.response :json
       end
     end
 

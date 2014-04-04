@@ -11,12 +11,11 @@ describe Cocoafind::GitHubApi do
   describe "repository" do
     before do
       stub_request(:get,"https://api.github.com/repos/foo/bar").
-          to_return(:body => File.new(File.dirname(__FILE__) + "/../fixtures/dttableviewmanager.json"),:status => 200, :content_type => 'application/json')
+          to_return(body: File.new(File.dirname(__FILE__) + "/../fixtures/dttableviewmanager.json"))
     end
 
     it "should return repository" do
       repo = @client.repository("foo","bar")
-      puts repo.body.class
       repo.body.name.should eql("DTTableViewManager")
     end
   end
