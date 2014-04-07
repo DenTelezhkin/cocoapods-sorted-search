@@ -1,3 +1,5 @@
+require 'ruby-progressbar'
+
 module Pod
   class Command
     class Search
@@ -5,7 +7,7 @@ module Pod
         self.summary = 'Sort pod search results easily!'
 
         self.description = <<-DESC
-          Sort CocoaPods search results by custom criteria
+          Sort CocoaPods search results by stars, forks, or repo activity.
         DESC
 
         self.command = "sort"
@@ -13,14 +15,14 @@ module Pod
         def initialize(argv)
           super
           @sort_by_stars = argv.flag?('stars')
-          @sort_by_commits = argv.flag?('commits')
+          @sort_by_commits = argv.flag?('activity')
           @sort_by_forks = argv.flag?('forks')
         end
 
         def self.options
           [
             ["--stars",   "Sort by stars"],
-            ["--commits", "Sort by most recently changed repo"],
+            ["--activity", "Sort by most recently changed repo"],
             ["--forks",   "Sort by amount of forks"]
           ].concat(super)
         end
@@ -28,17 +30,19 @@ module Pod
         def run
           specs = find_specs(@query)
           fetch_github_info(specs)
-          sorted_specs = sort_specs(specs)
-          print_specs(sorted_specs)
+          sorted_pods = sort_specs(specs)
+          print_specs(sorted_pods)
         end
 
         def fetch_github_info(specs)
-          UI.puts "\nFound " + specs.count.to_s + " specs. Fetching GitHub info, wait a moment please."
+          found = "\nFound " + specs.count.to_s + " specs. Fetching GitHub info, wait a moment please.\n"
+          UI.puts found.green
 
+          progress_bar = ProgressBar.create(total: specs.count, length: 60)
           specs.each do |spec|
             pod = pod_from_spec(spec)
             pod.github_watchers # This will force statistics provider to fetch github info unless it is already cached
-            #UI.puts "fetched github info for pod: "+ pod.name
+            progress_bar.increment
           end
         end
 
