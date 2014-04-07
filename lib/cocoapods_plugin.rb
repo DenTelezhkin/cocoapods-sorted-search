@@ -1,0 +1,1 @@
+require 'pod/command/find'
