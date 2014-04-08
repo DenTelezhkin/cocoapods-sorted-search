@@ -5,11 +5,11 @@ CocoaPods plugin which adds a `sort` subcommand for `pod search` to sort search 
 
 ##Usage
   
-    pod search sort --stars POD_NAME
+    pod search sort POD_NAME
   
 ## Params
 
-* **--stars** - sort by stars
+* **--stars** - sort by stars - **default**
 * **--forks** - sort by forks
 * **--activity** - sort by most recent commits
   
