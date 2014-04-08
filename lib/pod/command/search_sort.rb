@@ -54,6 +54,7 @@ module Pod
         def print_specs(sorted_pods)
           sorted_pods.each do |pod|
             UI.title("-> #{pod.name} (#{pod.version})".green, '', 1) do
+              next unless pod.github_last_activity
               stars = [0x2605].pack("U") + "  " + pod.github_watchers.to_s + " "
               forks = [0x2442].pack("U") + " " + pod.github_forks.to_s + " "
               commit = "Last commit: "+ pod.github_last_activity
@@ -73,15 +74,21 @@ module Pod
           pods = specs.map { |spec| pod_from_spec(spec) }
 
           if @sort_by_stars
-            return pods.sort {|x,y| y.github_watchers <=> x.github_watchers}
+            return pods.sort  do |x,y|
+              y.github_watchers.to_i <=> x.github_watchers.to_i
+            end
           end
 
           if @sort_by_commits
-            return pods.sort {|x,y| y.statistics_provider.github_pushed_at(y.set) <=> x.statistics_provider.github_pushed_at(x.set)}
+            return pods.sort  do |x,y|
+              y.statistics_provider.github_pushed_at(y.set).to_i <=> x.statistics_provider.github_pushed_at(x.set).to_i
+            end
           end
 
           if @sort_by_forks
-            return pods.sort {|x,y| y.github_forks <=> x.github_forks}
+            return pods.sort  do |x,y|
+              y.github_forks.to_i <=> x.github_forks.to_i
+            end
           end
         end
 
