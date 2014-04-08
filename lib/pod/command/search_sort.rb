@@ -64,6 +64,7 @@ module Pod
               commit = "Last commit: "+ pod.github_last_activity
 
               UI.puts_indented pod.summary
+              UI.puts_indented "pod '#{pod.name}', '~> #{pod.version}'"
               UI.puts_indented stars.yellow + forks.yellow
               UI.puts_indented commit.yellow
             end
