@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cocoapods-sorted-search (0.1.0)
+    cocoapods-sorted-search (0.1.1)
       cocoapods (~> 0.28)
       ruby-progressbar
 
