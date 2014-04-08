@@ -17,6 +17,10 @@ module Pod
           @sort_by_stars = argv.flag?('stars')
           @sort_by_commits = argv.flag?('activity')
           @sort_by_forks = argv.flag?('forks')
+
+          if !@sort_by_forks && !@sort_by_commits
+            @sort_by_stars = true
+          end
         end
 
         def self.options
