@@ -1,7 +1,7 @@
 CocoaPods sorted search
 ==============
 
-CocoaPods plugin which adds a subcommand for `pod search` to sort search results by amount of stars, forks, or github activity. 
+CocoaPods plugin which adds a `sort` subcommand for `pod search` to sort search results by amount of stars, forks, or github activity. 
 
 ##Usage
   
