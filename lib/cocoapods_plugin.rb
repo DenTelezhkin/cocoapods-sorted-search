@@ -1,1 +1,1 @@
-require 'pod/command/search_sort'
+require 'pod/command/search/sorted'
