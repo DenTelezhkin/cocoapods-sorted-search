@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ruby-progressbar'
   spec.add_dependency "typhoeus"
   spec.add_dependency "hashie"
+  spec.add_dependency "osx_keychain"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
