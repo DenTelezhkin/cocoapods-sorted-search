@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "cocoapods-sorted-search"
-  spec.version       = '0.1.2'
+  spec.version       = '0.1.3'
   spec.authors       = ["Denys Telezhkin"]
   spec.email         = ["strangervir@gmail.com"]
   spec.summary       = %q{CocoaPods plugin for sorted searching amongst CocoaPods.}
@@ -18,8 +18,11 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'cocoapods', '~> 0.28'
   spec.add_dependency 'ruby-progressbar'
+  spec.add_dependency "typhoeus"
+  spec.add_dependency "hashie"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
+  spec.add_development_dependency "webmock"
 end
