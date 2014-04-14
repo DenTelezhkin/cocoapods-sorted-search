@@ -1,8 +1,12 @@
 require 'ruby-progressbar'
+require 'cocoapods'
 
 module Pod
   class Command
     class Search
+
+      # The pod search sort subcommand
+      #
       class Sorted < Search
         self.summary = 'Sort pod search results easily!'
 
@@ -27,7 +31,7 @@ module Pod
           [
             ["--stars",   "Sort by stars"],
             ["--activity", "Sort by most recently changed repo"],
-            ["--forks",   "Sort by amount of forks"]
+            ["--forks",   "Sort by amount of forks"],
           ].concat(super)
         end
 
@@ -61,7 +65,7 @@ module Pod
               next unless pod.github_last_activity
               stars = [0x2605].pack("U") + "  " + pod.github_watchers.to_s + " "
               forks = [0x2442].pack("U") + " " + pod.github_forks.to_s + " "
-              commit = "Last commit: "+ pod.github_last_activity
+              commit = "Last commit: " + pod.github_last_activity
 
               UI.puts_indented pod.summary
               UI.puts_indented "pod '#{pod.name}', '~> #{pod.version}'"
@@ -79,19 +83,19 @@ module Pod
           pods = specs.map { |spec| pod_from_spec(spec) }
 
           if @sort_by_stars
-            return pods.sort  do |x,y|
+            return pods.sort  do |x, y|
               y.github_watchers.to_i <=> x.github_watchers.to_i
             end
           end
 
           if @sort_by_commits
-            return pods.sort  do |x,y|
+            return pods.sort  do |x, y|
               y.statistics_provider.github_pushed_at(y.set).to_i <=> x.statistics_provider.github_pushed_at(x.set).to_i
             end
           end
 
           if @sort_by_forks
-            return pods.sort  do |x,y|
+            return pods.sort  do |x, y|
               y.github_forks.to_i <=> x.github_forks.to_i
             end
           end
@@ -100,10 +104,10 @@ module Pod
         def find_specs(query)
           sets = SourcesManager.search_by_name(query.join(' ').strip, @full_text_search)
           if @supported_on_ios
-            sets.reject!{ |set| !set.specification.available_platforms.map(&:name).include?(:ios) }
+            sets.reject! { |set| !set.specification.available_platforms.map(&:name).include?(:ios) }
           end
           if @supported_on_osx
-            sets.reject!{ |set| !set.specification.available_platforms.map(&:name).include?(:osx) }
+            sets.reject! { |set| !set.specification.available_platforms.map(&:name).include?(:osx) }
           end
 
           sets

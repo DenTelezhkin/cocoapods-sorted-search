@@ -4,14 +4,17 @@ require 'hashie'
 require 'sorted_search/credentials'
 
 module SortedSearch
+
+  # Github API client
+  #
   module GitHub
 
     HOSTNAME = "api.github.com"
 
     # returns Typhoeus::Request object, that can be added to Hydra
-    def self.repo(owner,repo)
+    def self.repo(owner, repo)
       token = SortedSearch::Credentials.token
-      request = Typhoeus::Request.new("https://#{HOSTNAME}/repos/#{owner}/#{repo}", headers: { Authorization: "token #{token}"})
+      request = Typhoeus::Request.new("https://#{HOSTNAME}/repos/#{owner}/#{repo}", headers: { Authorization: "token #{token}" })
       request.on_complete(&self.parse_block)
       request
     end

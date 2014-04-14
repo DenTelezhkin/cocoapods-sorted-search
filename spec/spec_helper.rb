@@ -1,8 +1,49 @@
-# encoding: UTF-8
-$:.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
+require 'pathname'
+ROOT = Pathname.new(File.expand_path('../../', __FILE__))
+$LOAD_PATH.unshift((ROOT + 'lib').to_s)
+$LOAD_PATH.unshift((ROOT + 'spec').to_s)
 
-require 'rspec'
+require 'bundler/setup'
+require 'cocoapods'
+require 'cocoapods_plugin'
 
 def fixture(name)
   File.read(File.dirname(__FILE__) + "/fixtures/#{name}")
 end
+
+#-----------------------------------------------------------------------------#
+
+# The CocoaPods namespace
+#
+module Pod
+
+  # Disable the wrapping so the output is deterministic in the tests.
+  #
+  UI.disable_wrap = true
+
+  # Redirects the messages to an internal store.
+  #
+  module UI
+    @output = ''
+    @warnings = ''
+
+    class << self
+      attr_accessor :output
+      attr_accessor :warnings
+
+      def puts(message = '')
+        @output << "#{message}\n"
+      end
+
+      def warn(message = '', actions = [])
+        @warnings << "#{message}\n"
+      end
+
+      def print(message)
+        @output << message
+      end
+    end
+  end
+end
+
+#-----------------------------------------------------------------------------#
