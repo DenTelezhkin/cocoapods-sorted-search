@@ -1,5 +1,6 @@
 require 'ruby-progressbar'
 require 'cocoapods'
+require 'sorted_search/github'
 
 module Pod
   class Command
@@ -29,12 +30,15 @@ module Pod
         end
 
         def validate!
-          super
           help! "GitHub token is required" unless @token
+          super
         end
 
         def run
-          puts @token
+          SortedSearch::Credentials.token = @token
+          puts
+          puts SortedSearch::Credentials.token.green + " token saved to OS X keychain".green
+          puts
         end
       end
     end

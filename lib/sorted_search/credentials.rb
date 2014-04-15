@@ -10,12 +10,12 @@ module SortedSearch
 
     def self.token
       keychain = OSXKeychain.new
-      keychain["GitHub CocoaPods sorted search", GITHUB_TOKEN_KEY]
+      keychain["GitHub CocoaPods OAuth token", GITHUB_TOKEN_KEY]
     end
 
     def self.token=(token)
       keychain = OSXKeychain.new
-      keychain["GitHub CocoaPods sorted search", GITHUB_TOKEN_KEY] = token
+      keychain["GitHub CocoaPods OAuth token", GITHUB_TOKEN_KEY] = token
     end
 
   end

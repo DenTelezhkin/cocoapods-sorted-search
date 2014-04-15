@@ -1,5 +1,6 @@
 require 'ruby-progressbar'
 require 'cocoapods'
+require 'sorted_search/printers/pods_printer'
 
 module Pod
   class Command
@@ -25,6 +26,8 @@ module Pod
           if !@sort_by_forks && !@sort_by_commits
             @sort_by_stars = true
           end
+
+          @printer_klass = SortedSearch::PodPrinter
         end
 
         def self.options
@@ -39,7 +42,9 @@ module Pod
           specs = find_specs(@query)
           fetch_github_info(specs)
           sorted_pods = sort_specs(specs)
-          print_specs(sorted_pods)
+
+          printer = @printer_klass.new
+          printer.print(sorted_pods)
         end
 
         def fetch_github_info(specs)
@@ -57,26 +62,6 @@ module Pod
         def pod_from_spec(spec)
           statistics_provider = Config.instance.spec_statistics_provider
           Specification::Set::Presenter.new(spec, statistics_provider)
-        end
-
-        def print_specs(sorted_pods)
-          sorted_pods.each do |pod|
-            UI.title("-> #{pod.name} (#{pod.version})".green, '', 1) do
-              next unless pod.github_last_activity
-              stars = [0x2605].pack("U") + "  " + pod.github_watchers.to_s + " "
-              forks = [0x2442].pack("U") + " " + pod.github_forks.to_s + " "
-              commit = "Last commit: " + pod.github_last_activity
-
-              UI.puts_indented pod.summary
-              UI.puts_indented "pod '#{pod.name}', '~> #{pod.version}'"
-              UI.puts_indented stars.yellow + forks.yellow
-              UI.puts_indented commit.yellow
-            end
-
-          end
-
-          UI.puts
-
         end
 
         def sort_specs(specs)

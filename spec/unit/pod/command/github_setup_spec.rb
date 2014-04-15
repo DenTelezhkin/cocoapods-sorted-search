@@ -1,4 +1,5 @@
-require File.expand_path('../../../spec_helper', __FILE__)
+require File.expand_path('../../../../spec_helper', __FILE__)
+
 # CocoaPods namespace
 #
 module Pod
@@ -14,6 +15,7 @@ module Pod
         command = Pod::Command.parse(['setup github'])
         expect { command.validate! }.to raise_error
       end
+
     end
 
   end
