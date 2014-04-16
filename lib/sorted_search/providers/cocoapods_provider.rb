@@ -18,24 +18,21 @@ module Pod
 
       def sort_specs
         pods = @specs.map { |spec| pod_from_spec(spec) }
-        case @sorting_criteria
-        when :stars
-          return pods.sort  do |x, y|
+
+        pods.sort do |x, y|
+          case @sorting_criteria
+
+          when :stars
             y.github_watchers.to_i <=> x.github_watchers.to_i
-          end
-        when :forks
-          return pods.sort  do |x, y|
-            y.statistics_provider.github_pushed_at(y.set).to_i <=> x.statistics_provider.github_pushed_at(x.set).to_i
-          end
-        when :activity
-          return pods.sort  do |x, y|
+          when :forks
             y.github_forks.to_i <=> x.github_forks.to_i
+          when :activity
+            y.statistics_provider.github_pushed_at(y.set).to_i <=> x.statistics_provider.github_pushed_at(x.set).to_i
+          else
+            nil
           end
-        else
-          nil
         end
       end
     end
-
   end
 end

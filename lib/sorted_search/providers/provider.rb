@@ -7,6 +7,8 @@ module Pod
     #
     class Provider
 
+      attr_reader :sorting_criteria
+
       def initialize(specs, sorting_criteria)
         @specs = specs
         @sorting_criteria = sorting_criteria

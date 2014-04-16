@@ -1,7 +1,7 @@
-require 'ruby-progressbar'
 require 'cocoapods'
 require 'sorted_search/printers/pods_printer'
 require 'sorted_search/providers/cocoapods_provider'
+require 'sorted_search/credentials'
 
 module Pod
   class Command
@@ -23,7 +23,7 @@ module Pod
 
         def initialize(argv)
           super
-          @sorting_criteria = argv.flag?('stars')     ? :stars    : nil
+          @sorting_criteria = argv.flag?('stars')      ? :stars    : nil
           @sorting_criteria ||= argv.flag?('forks')    ? :forks    : nil
           @sorting_criteria ||= argv.flag?('activity') ? :activity : nil
 
