@@ -10,6 +10,9 @@ module Pod
       # The pod search sort subcommand
       #
       class Sorted < Search
+
+        attr_reader :sorting_criteria
+
         self.summary = 'Sort pod search results easily!'
 
         self.description = <<-DESC
