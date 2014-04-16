@@ -1,6 +1,7 @@
 require 'ruby-progressbar'
 require 'cocoapods'
 require 'sorted_search/printers/pods_printer'
+require 'sorted_search/providers/cocoapods_provider'
 
 module Pod
   class Command
@@ -19,14 +20,15 @@ module Pod
 
         def initialize(argv)
           super
-          @sort_by_stars = argv.flag?('stars')
-          @sort_by_commits = argv.flag?('activity')
-          @sort_by_forks = argv.flag?('forks')
+          @sorting_criteria = argv.flag?('stars')     ? :stars    : nil
+          @sorting_criteria ||= argv.flag?('forks')    ? :forks    : nil
+          @sorting_criteria ||= argv.flag?('activity') ? :activity : nil
 
-          if !@sort_by_forks && !@sort_by_commits
-            @sort_by_stars = true
+          unless @sorting_criteria
+            @sorting_criteria = :stars
           end
 
+          @provider_klass = SortedSearch::CocoapodsProvider
           @printer_klass = SortedSearch::PodPrinter
         end
 
@@ -40,50 +42,12 @@ module Pod
 
         def run
           specs = find_specs(@query)
-          fetch_github_info(specs)
-          sorted_pods = sort_specs(specs)
+
+          provider = @provider_klass.new(specs, @sorting_criteria)
+          sorted_pods = provider.provide_sorted_specs
 
           printer = @printer_klass.new
           printer.print(sorted_pods)
-        end
-
-        def fetch_github_info(specs)
-          found = "\nFound " + specs.count.to_s + " specs. Fetching GitHub info, wait a moment please.\n"
-          UI.puts found.green
-
-          progress_bar = ProgressBar.create(total: specs.count, length: 60)
-          specs.each do |spec|
-            pod = pod_from_spec(spec)
-            pod.github_watchers # This will force statistics provider to fetch github info unless it is already cached
-            progress_bar.increment
-          end
-        end
-
-        def pod_from_spec(spec)
-          statistics_provider = Config.instance.spec_statistics_provider
-          Specification::Set::Presenter.new(spec, statistics_provider)
-        end
-
-        def sort_specs(specs)
-          pods = specs.map { |spec| pod_from_spec(spec) }
-
-          if @sort_by_stars
-            return pods.sort  do |x, y|
-              y.github_watchers.to_i <=> x.github_watchers.to_i
-            end
-          end
-
-          if @sort_by_commits
-            return pods.sort  do |x, y|
-              y.statistics_provider.github_pushed_at(y.set).to_i <=> x.statistics_provider.github_pushed_at(x.set).to_i
-            end
-          end
-
-          if @sort_by_forks
-            return pods.sort  do |x, y|
-              y.github_forks.to_i <=> x.github_forks.to_i
-            end
-          end
         end
 
         def find_specs(query)

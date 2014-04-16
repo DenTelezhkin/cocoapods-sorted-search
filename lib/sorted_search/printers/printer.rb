@@ -5,7 +5,7 @@ module Pod
     #
     class Printer
       def print(pods)
-        raise Informative "Foo"
+        raise Informative "Redefine print method in subclasses"
       end
     end
 
