@@ -13,7 +13,7 @@ module Pod
 
       it "presents the help if no name is provided" do
         command = Pod::Command.parse(['setup github'])
-        expect { command.validate! }.to raise_error
+        expect { command.validate! }.to raise_error(CLAide::Help)
       end
 
     end

@@ -1,6 +1,7 @@
 require 'ruby-progressbar'
 require 'cocoapods'
 require 'sorted_search/github'
+require 'sorted_search/credentials'
 
 module Pod
   class Command

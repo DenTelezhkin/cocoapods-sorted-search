@@ -16,7 +16,7 @@ module SortedSearch
       end
 
       it "should receive github repo info" do
-        allow(SortedSearch::Credentials).to receive(:token).and_return("foo")
+        allow(Pod::SortedSearch::Credentials).to receive(:token).and_return("foo")
 
         request = SortedSearch::GitHub.repo('foo', 'bar')
         request.run
