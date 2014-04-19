@@ -2,6 +2,8 @@ require 'cocoapods'
 require 'sorted_search/printers/pods_printer'
 require 'sorted_search/providers/cocoapods_provider'
 require 'sorted_search/credentials'
+require 'sorted_search/providers/github_provider'
+require 'sorted_search/printers/github_printer'
 
 module Pod
   class Command
@@ -31,8 +33,10 @@ module Pod
             @sorting_criteria = :stars
           end
 
-          @provider_klass = SortedSearch::CocoapodsProvider
-          @printer_klass = SortedSearch::PodPrinter
+          # @provider_klass = SortedSearch::CocoapodsProvider
+          @provider_klass = ::SortedSearch::GithubProvider
+          @printer_klass = ::SortedSearch::GitHubPrinter
+
         end
 
         def self.options

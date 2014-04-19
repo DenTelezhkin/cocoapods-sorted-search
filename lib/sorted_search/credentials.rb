@@ -1,24 +1,22 @@
 require 'osx_keychain'
 
-module Pod
-  module SortedSearch
+module SortedSearch
 
-    # Module for saving github token to Mac OS X keychain
-    #
-    module Credentials
+  # Module for saving github token to Mac OS X keychain
+  #
+  module Credentials
 
-      GITHUB_TOKEN_KEY = "GitHub token key"
+    GITHUB_TOKEN_KEY = "GitHub token key"
 
-      def self.token
-        keychain = OSXKeychain.new
-        keychain["GitHub CocoaPods OAuth token", GITHUB_TOKEN_KEY]
-      end
-
-      def self.token=(token)
-        keychain = OSXKeychain.new
-        keychain["GitHub CocoaPods OAuth token", GITHUB_TOKEN_KEY] = token
-      end
-
+    def self.token
+      keychain = OSXKeychain.new
+      keychain["GitHub CocoaPods OAuth token", GITHUB_TOKEN_KEY]
     end
+
+    def self.token=(token)
+      keychain = OSXKeychain.new
+      keychain["GitHub CocoaPods OAuth token", GITHUB_TOKEN_KEY] = token
+    end
+
   end
 end

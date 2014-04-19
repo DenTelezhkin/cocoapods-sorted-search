@@ -1,5 +1,14 @@
 HashSyntax:
   EnforcedStyle: ruby19
+  SupportedStyles:
+    - ruby19
+    - hash_rockets
+
+CaseIndentation:
+  SupportedStyles:
+    - case
+    - end
+  IndentOneStep: true
 
 StringLiterals:
   Enabled: false

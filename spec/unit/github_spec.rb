@@ -16,15 +16,13 @@ module SortedSearch
       end
 
       it "should receive github repo info" do
-        allow(Pod::SortedSearch::Credentials).to receive(:token).and_return("foo")
-
-        request = SortedSearch::GitHub.repo('foo', 'bar')
-        request.run
+        allow(SortedSearch::Credentials).to receive(:token).and_return("foo")
 
         repo = nil
-        if request.response.success?
-          repo = request.response.handled_response
+        request = SortedSearch::GitHub.get_repo('foo', 'bar') do |parsed_response|
+          repo = parsed_response
         end
+        request.run
 
         repo.name.should eql('DTTableViewManager')
       end
