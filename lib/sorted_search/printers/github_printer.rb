@@ -9,33 +9,45 @@ module SortedSearch
 
     def print(pods)
 
-      puts pods.class
-
       pods.each do |array|
-        spec = array[0]
+        pod = array[0]
         mash = array[1]
 
-        puts spec.class
-        puts mash.watchers
+        Pod::UI.title("-> #{pod.name} (#{pod.version})".green, '', 1) do
+          stars = [0x2605].pack('U') + '  ' + mash.stargazers_count.to_s + ' '
+          forks = [0x2442].pack('U') + ' ' + mash.forks.to_s + ' '
+          commit = 'Last commit: ' + distance_from_now_in_words(mash.pushed_at)
+
+          Pod::UI.puts_indented pod.summary
+          Pod::UI.puts_indented "pod '#{pod.name}', '~> #{pod.version}'"
+          Pod::UI.puts_indented stars.yellow + forks.yellow
+          Pod::UI.puts_indented commit.yellow
+        end
       end
 
-      # pods.each do |pod|
-      #   Pod::UI.title("-> #{pod.name} (#{pod.version})".green, '', 1) do
-      #     next unless pod.github_last_activity
-      #     stars = [0x2605].pack('U') + '  ' + pod.github_watchers.to_s + ' '
-      #     forks = [0x2442].pack('U') + ' ' + pod.github_forks.to_s + ' '
-      #     commit = 'Last commit: ' + pod.github_last_activity
-      #
-      #     Pod::UI.puts_indented pod.summary
-      #     Pod::UI.puts_indented "pod '#{pod.name}', '~> #{pod.version}'"
-      #     Pod::UI.puts_indented stars.yellow + forks.yellow
-      #     Pod::UI.puts_indented commit.yellow
-      #   end
-      #
-      # end
-      #
-      # Pod::UI.puts
+      Pod::UI.puts
     end
+
+    def distance_from_now_in_words(from_time)
+      return nil unless from_time
+      from_time = Time.parse(from_time) unless from_time.is_a?(Time)
+      to_time = Time.now
+      distance_in_days = (((to_time - from_time).abs) / 60 / 60 / 24).round
+
+      case distance_in_days
+        when 0..7
+          "less than a week ago"
+        when 8..29
+          "#{distance_in_days} days ago"
+        when 30..45
+          "1 month ago"
+        when 46..365
+          "#{(distance_in_days.to_f / 30).round} months ago"
+        else
+          "more than a year ago"
+      end
+    end
+
   end
 
 end
