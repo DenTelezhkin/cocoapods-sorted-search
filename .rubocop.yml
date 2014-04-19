@@ -48,7 +48,10 @@ ClassLength:
   Max: 200
 
 MethodLength:
-  Max: 18
+  Max: 30
+
+CyclomaticComplexity:
+  Max: 7
 
 LineLength:
   Enabled: false

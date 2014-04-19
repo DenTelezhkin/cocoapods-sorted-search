@@ -26,6 +26,12 @@ module SortedSearch
 
           if response_object
             @github_repos[pod] = response_object
+          else
+            mash = Hashie::Mash.new
+            mash.stargazers_count = 0
+            mash.forks = 0
+            mash.pushed_at = 0
+            @github_repos[pod] = mash
           end
         end
 

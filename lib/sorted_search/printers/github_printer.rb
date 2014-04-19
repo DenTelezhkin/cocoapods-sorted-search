@@ -14,9 +14,19 @@ module SortedSearch
         mash = array[1]
 
         Pod::UI.title("-> #{pod.name} (#{pod.version})".green, '', 1) do
-          stars = [0x2605].pack('U') + '  ' + mash.stargazers_count.to_s + ' '
-          forks = [0x2442].pack('U') + ' ' + mash.forks.to_s + ' '
-          commit = 'Last commit: ' + distance_from_now_in_words(mash.pushed_at)
+          stars = [0x2605].pack('U') + '  '
+          forks = [0x2442].pack('U') + ' '
+          commit = 'Last commit: '
+
+          if mash.name
+            stars  += mash.stargazers_count.to_s + ' '
+            forks  += mash.forks.to_s + ' '
+            commit += distance_from_now_in_words(mash.pushed_at)
+          else
+            stars  += "Unknown "
+            forks  += "Unknown "
+            commit += "Unknown "
+          end
 
           Pod::UI.puts_indented pod.summary
           Pod::UI.puts_indented "pod '#{pod.name}', '~> #{pod.version}'"
