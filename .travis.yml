@@ -1,7 +1,7 @@
 language: ruby
 
 before_install:
-  - sudo gem update --system 2.1.11
+  - gem update --system 2.1.11
   - gem --version
   - CFLAGS="-F /System/Library/Frameworks" sudo gem install cocoapods -- --with-ldflags="-F/System/Library/Frameworks"
 
