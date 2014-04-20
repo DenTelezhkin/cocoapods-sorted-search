@@ -1,16 +1,15 @@
 language: objective-c
 
 env:
-  - RVM_RUBY_VERSION=system
+  - RVM_RUBY_VERSION=2.0.0
+  - RVM_RUBY_VERSION=2.1.1
   - RVM_RUBY_VERSION=1.8.7-p358
 
 before_install:
   - curl http://curl.haxx.se/ca/cacert.pem -o /usr/local/share/cacert.pem
   - source ~/.rvm/scripts/rvm
-  - if [[ $RVM_RUBY_VERSION != 'system' ]]; then rvm install $RVM_RUBY_VERSION; fi
+  - rvm install $RVM_RUBY_VERSION
   - rvm use $RVM_RUBY_VERSION
-  - if [[ $RVM_RUBY_VERSION == 'system' ]]; then export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future; fi
-  - if [[ $RVM_RUBY_VERSION == 'system' ]]; then sudo gem install bundler --no-ri --no-rdoc; else gem install bundler --no-ri --no-rdoc; fi
 
 install:
   - bundle install --without=documentation --path ./travis_bundle_dir
