@@ -37,7 +37,7 @@ module Pod
             @provider_klass = SortedSearch::GithubProvider
             @printer_klass = SortedSearch::GitHubPrinter
           else
-            UI.warn "Using anonymous requests. GitHub rate limit 60 requests per hour." 
+            UI.warn "Using anonymous requests. GitHub rate limit 60 requests per hour."
             @provider_klass = SortedSearch::CocoapodsProvider
             @printer_klass = SortedSearch::CocoapodsPrinter
           end

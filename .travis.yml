@@ -10,6 +10,7 @@ before_install:
   - source ~/.rvm/scripts/rvm
   - rvm install $RVM_RUBY_VERSION
   - rvm use $RVM_RUBY_VERSION
+  - export ARCHFLAGS=-Wno-shorten-64-to-32 # supress warnings for osx_keychain gem
 
 install:
   - bundle install --without=documentation --path ./travis_bundle_dir
