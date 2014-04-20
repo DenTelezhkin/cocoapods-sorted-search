@@ -24,7 +24,7 @@ CocoaPods plugin which adds a `sort` subcommand for `pod search` to sort search 
 
   Plugin uses GitHub anonymous requests by default, that have rate limit of 60 requests per hour.
   
-  Feed plugin with GitHub OAuth token, and raise the limit to **5000** requests per hour! Not only that, if provided with token, plugin starts to fetch GitHub info in parallel, making sorting incredibly fast. 
+  Feed plugin with GitHub OAuth token, and raise the limit to **5000** requests per hour! Not only that, if provided with token, plugin starts to fetch GitHub info in parallel, making sorting **incredibly fast**. 
   
   Steps for token configuration:
   1. Go to GitHub settings -> Applications -> Personal Access Tokens
