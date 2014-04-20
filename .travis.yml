@@ -1,16 +1,13 @@
 language: objective-c
 
-env:
-  - RVM_RUBY_VERSION=2.0.0
+env: 
   - RVM_RUBY_VERSION=2.1.1
-  - RVM_RUBY_VERSION=1.9.3
 
 before_install:
   - curl http://curl.haxx.se/ca/cacert.pem -o /usr/local/share/cacert.pem
   - source ~/.rvm/scripts/rvm
   - rvm install $RVM_RUBY_VERSION
   - rvm use $RVM_RUBY_VERSION
-  - export ARCHFLAGS=-Wno-shorten-64-to-32 # supress warnings for osx_keychain gem
 
 install:
   - bundle install --without=documentation --path ./travis_bundle_dir
