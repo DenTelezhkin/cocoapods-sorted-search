@@ -41,3 +41,7 @@ Your token will be stored in OS X Keychain and used automatically for fetching G
 
 - CocoaPods 0.28 and higher
 - Ruby 1.9.3 and higher
+
+## Troubleshooting
+
+First of, read [troubleshooting](https://github.com/DenHeadless/cocoapods-sorted-search/wiki/Troubleshooting) wiki page. If something still not right, post issue on GitHub to let me know!
