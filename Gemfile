@@ -5,4 +5,5 @@ gemspec
 
 group :development do
   gem 'cocoapods'
+  gem 'rubocop'
 end
