@@ -6,7 +6,7 @@ CocoaPods sorted search
 
 CocoaPods plugin which adds a `sort` subcommand for `pod search` to sort search results by amount of stars, forks, or github activity. 
 
-##Usage
+## Usage
   
     pod search sort POD_NAME
   
@@ -20,10 +20,24 @@ CocoaPods plugin which adds a `sort` subcommand for `pod search` to sort search 
 
     [sudo] gem install cocoapods-sorted-search
     
-## Known issues
+## Unleash the ~~hounds~~ pods!
 
-  Currently GitHub has a rate limit set for 60 API requests per hour. CocoaPods does great job at caching results, but it is easy to exceed current limit. Use with care =)
+  Plugin uses GitHub anonymous requests by default, that have rate limit of 60 requests per hour.
+  
+  Feed plugin with GitHub OAuth token, and raise the limit to **5000** requests per hour! Not only that, if provided with token, plugin starts to fetch GitHub info in parallel, making sorting incredibly fast. 
+  
+  Steps for token configuration:
+  1. Go to GitHub settings -> Applications -> Personal Access Tokens
+  2. Generate new one and **uncheck** all scopes. It should look [like this](https://raw.githubusercontent.com/DenHeadless/cocoapods-sorted-search/master/token_example.png).
+  3. Run ``` pod setup github --token=MyToken ```
+
+Your token will be stored in OS X Keychain and used automatically for fetching GitHub info for repositories.
   
 ## Example
 
 ![](example.gif)
+
+## Requirements 
+
+- CocoaPods 0.28 and higher
+- Ruby 1.9.3 and higher
