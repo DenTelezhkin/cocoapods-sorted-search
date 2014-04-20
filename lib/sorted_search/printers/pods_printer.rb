@@ -5,7 +5,7 @@ module SortedSearch
 
   # Printer for pods specification
   #
-  class PodPrinter < Printer
+  class CocoapodsPrinter < Printer
 
     def print(pods)
       pods.each do |pod|

@@ -57,7 +57,7 @@ module SortedSearch
           else
             nil
         end
-      end.reverse!
+      end
     end
   end
 end
