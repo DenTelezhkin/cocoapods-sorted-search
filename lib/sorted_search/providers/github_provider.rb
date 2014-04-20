@@ -30,7 +30,7 @@ module SortedSearch
             mash = Hashie::Mash.new
             mash.stargazers_count = 0
             mash.forks = 0
-            mash.pushed_at = 0
+            mash.pushed_at = "0 - Unknown"
             @github_repos[pod] = mash
           end
         end
