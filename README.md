@@ -32,6 +32,12 @@ CocoaPods plugin which adds a `sort` subcommand for `pod search` to sort search 
   3. Run ``` pod setup github --token=MyToken ```
 
 Your token will be stored in OS X Keychain and used automatically for fetching GitHub info for repositories.
+
+## Original sort parameters
+
+Original sort parameters are supported too! So if you want to go crazy, and search for all Ruby stuff, that exists on iOS, you can do stuff like this:
+
+    pod search --ios --full sort Ruby
   
 ## Example
 
