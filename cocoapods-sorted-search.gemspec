@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "cocoapods-sorted-search"
-  spec.version       = '0.2.2'
+  spec.version       = '0.2.3'
   spec.authors       = ["Denys Telezhkin"]
   spec.email         = ["strangervir@gmail.com"]
   spec.summary       = %q{CocoaPods plugin for sorted searching amongst CocoaPods.}

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cocoapods-sorted-search (0.2.2)
+    cocoapods-sorted-search (0.2.3)
       cocoapods (>= 0.28)
       hashie
       osx_keychain

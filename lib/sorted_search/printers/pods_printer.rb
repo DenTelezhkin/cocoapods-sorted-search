@@ -17,6 +17,7 @@ module SortedSearch
 
           Pod::UI.puts_indented pod.summary
           Pod::UI.puts_indented "pod '#{pod.name}', '~> #{pod.version}'"
+          Pod::UI.puts_indented pod.homepage
           Pod::UI.puts_indented stars.yellow + forks.yellow
           Pod::UI.puts_indented commit.yellow
         end
