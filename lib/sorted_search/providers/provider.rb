@@ -31,8 +31,7 @@ module SortedSearch
     end
 
     def pod_from_spec(spec)
-      statistics_provider = Pod::Config.instance.spec_statistics_provider
-      Pod::Specification::Set::Presenter.new(spec, statistics_provider)
+      Pod::Specification::Set::Presenter.new(spec)
     end
   end
 

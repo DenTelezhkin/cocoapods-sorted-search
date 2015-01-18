@@ -4,6 +4,6 @@ source 'https://rubygems.org'
 gemspec
 
 group :development do
-  gem 'cocoapods'
-  gem 'rubocop'
+  gem 'cocoapods', '0.36.0.beta.1'
+  gem 'rubocop', '0.20.1'
 end

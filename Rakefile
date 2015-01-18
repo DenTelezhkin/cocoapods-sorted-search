@@ -31,7 +31,7 @@ end
 desc 'Checks code style'
 task :rubocop do
   require 'rubocop'
-  cli = Rubocop::CLI.new
+  cli = RuboCop::CLI.new
   result = cli.run(FileList['{spec,lib}/**/*.rb'])
   abort('RuboCop failed!') unless result == 0
 end
