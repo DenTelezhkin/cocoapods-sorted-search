@@ -1,4 +1,3 @@
-[![Build Status](http://img.shields.io/travis/DenHeadless/cocoapods-sorted-search/master.svg)](https://travis-ci.org/DenHeadless/cocoapods-sorted-search)
 [![Gem Version](http://img.shields.io/gem/v/cocoapods-sorted-search.svg)](http://badge.fury.io/rb/cocoapods-sorted-search)
 
 CocoaPods sorted search
