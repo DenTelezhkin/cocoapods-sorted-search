@@ -5,5 +5,5 @@ gemspec
 
 group :development do
   gem 'cocoapods', '0.36.0.beta.1'
-  gem 'rubocop', '0.20.1'
+  gem 'rubocop'
 end
